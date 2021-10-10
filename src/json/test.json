@@ -1,0 +1,10 @@
+{
+    "ouverture1":{
+        "name": "Ouverture 1",
+        "infos": "Ouverture pour les blancs",
+        "playerColor": "white",
+        "variantsList": ["moves"],
+        "moves": [["m", ["e2", "e4"]], ["m", ["e7", "e5"]], ["m", ["f1", "c4"]], ["m", ["f8", "c5"]], ["m", ["g1", "f3"]], ["m", ["g8", "f6"]],
+                  ["c", ["w", "o-o"]], ["c", ["b", "o-o"]], ["m", ["d2", "d3"]]]
+    }
+}

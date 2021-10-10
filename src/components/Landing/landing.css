@@ -1,0 +1,77 @@
+.landingContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.openingMenu{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.trainingLinks{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.linkBtn{
+    text-decoration: none;
+    color: black;
+    margin-top: 15px;
+}
+
+.clickableBtn{
+    cursor: pointer;
+    color: black;
+    margin-top: 15px;
+}
+
+.chooseOpening{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    margin: 20px;
+    min-width: 300px;
+    min-height: 200px;
+}
+
+.createOpening{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    margin: 20px;
+    min-width: 300px;
+    min-height: 200px;
+}
+
+.createInput{
+    margin: 5px;
+}
+
+.createSelector{
+    margin: 5px;
+}
+
+.openingJSON{
+    display: flex;
+    flex-wrap: wrap;
+    width: 500px;
+    height: 300px;
+    border: 2px solid black;
+    justify-content: center;
+    align-items: center;
+    text-overflow: clip;
+    text-align: left;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: auto;
+}

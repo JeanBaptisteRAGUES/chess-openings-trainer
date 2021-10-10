@@ -1,0 +1,32 @@
+{
+    "londonSystem":{
+        "name": "London System",
+        "infos": "Ouverture pour les blancs",
+        "playerColor": "white",
+        "variantsList": ["moves", "variant_e6", "variant_cxd4"],
+        "moves":[["m", ["d2", "d4"]],["m", ["g8", "f6"]],["m", ["c1","f4"]], ["m", ["c7", "c5"]], ["m", ["e2", "e3"]],
+                ["v", ["variant_e6", "variant_cxd4"]]],
+        "variant_e6": [["m", ["e7", "e6"]], ["m", ["g1", "f3"]], ["m", ["h8", "g8"]], ["m", ["f1", "e2"]], ["m", ["g8", "h8"]], ["c", ["w", "o-o"]]],
+        "variant_cxd4":[["m", ["c5", "d4"]], ["m", ["e3", "d4"]], ["m", ["d7", "d6"]], ["m", ["f1", "e2"]], ["m", ["a7", "a5"]], ["m", ["d1", "d2"]],
+                        ["m", ["f6", "d5"]], ["m", ["b1", "c3"]], ["m", ["d5", "f4"]], ["m", ["d2", "f4"]], ["m", ["b8", "d7"]], ["c", ["w", "o-o-o"]]]
+    },
+    "friedLiver":{
+        "name": "Fried Liver",
+        "infos": "Ouverture pour les blancs",
+        "playerColor": "white",
+        "variantsList": ["moves"],
+        "moves": [["m", ["e2", "e4"]], ["m", ["e7", "e5"]], ["m", ["f1", "c4"]], ["m", ["f8", "c5"]], ["m", ["g1", "f3"]], ["m", ["g8", "f6"]],
+                  ["c", ["w", "o-o"]], ["c", ["b", "o-o"]], ["m", ["d2", "d3"]]]
+    },
+    "caroKann":{
+        "name": "Caro Kann",
+        "infos": "Ouverture pour les noirs",
+        "playerColor": "black"
+    },
+    "kingIndianSetup":{
+        "name": "King's Indian Setup",
+        "infos": "Ouverture pour les noirs",
+        "playerColor": "black",
+        "moves": [["m", ["d2", "d4"]], ["m", ["e7", "e6"]]]
+    }
+}
