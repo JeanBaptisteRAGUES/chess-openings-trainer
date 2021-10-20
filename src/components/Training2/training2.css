@@ -62,6 +62,10 @@
     background-color: cyan;
 }
 
+.training_whiteCase.hinted{
+    background-color: yellow;
+}
+
 .training_blackCase{
     display: flex;
     flex-direction: column;
@@ -75,6 +79,10 @@
 
 .training_blackCase.selected{
     background-color: blue;
+}
+
+.training_blackCase.hinted{
+    background-color: darkorange;
 }
 
 .piece{

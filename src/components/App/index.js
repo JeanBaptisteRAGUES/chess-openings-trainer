@@ -15,7 +15,7 @@ function App() {
       <Switch>
           <Route exact path="/" component={Landing} />
           <Route path="/training/:opening" component={Training} />
-          <Route path="/training2/:opening" component={Training2} />
+          <Route path="/training2/:opening/:guided" component={Training2} />
           <Route path="/createopening/:opening" component={CreateOpening} />
           <Route path="/createopening2/:opening" component={CreateOpening2} />
           <Route path="/createpuzzle/:opening" component={CreatePuzzle} />

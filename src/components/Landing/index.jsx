@@ -24,6 +24,7 @@ const Landing = () => {
     const [newOpeningName, setNewOpeningName] = useState('');
     const [newOpeningColor, setNewOpeningColor] = useState('');
     const [newOpeningJSON, setNewOpeningJSON] = useState('');
+    const [isGuided, setIsGuided] = useState(false);
 
     const updateOpening = (e) => {
         console.log('Update Opening');
@@ -132,10 +133,14 @@ const Landing = () => {
                 </Fragment>
             :
                 <div className="trainingLinks">
-                    <Link to={'/training2/' + opening} className="linkBtn">S'entrainer sur l'ouverture ({opening})</Link>
-                    <Link to={'/createOpening2/' + opening} className="linkBtn">Modifier l'ouverture ({opening})</Link>
-                    <Link to={'/createPuzzle/' + opening} className="linkBtn">Créer des puzzles ({opening})</Link>
+                    <Link to={'/training2/' + opening + '/' + isGuided} className="linkBtn">S'entrainer ({opening})</Link>
+                    <Link to={'/createOpening2/' + opening} className="linkBtn">Modifier({opening})</Link>
+                    <Link to={'/createPuzzle/' + opening} className="linkBtn">Puzzles ({opening})</Link>
                     <div className="clickableBtn" onClick={() => confirmDeleteOpening()}>Supprimer</div>
+                    <p>
+                        <input type="checkbox" id="guidedBtn" name="guidedBtn" onClick={() => setIsGuided(!isGuided)}/>
+                        <label htmlFor="guidedBtn">Ouverture guidée</label>
+                    </p>
                 </div>
     ;
 

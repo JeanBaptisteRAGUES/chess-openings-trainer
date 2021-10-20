@@ -7,18 +7,21 @@ import {BsQuestionCircle} from 'react-icons/bs';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { Link } from 'react-router-dom';
+import {deepCloneArray, shuffleArray} from '../../tools/arrayScripts';
 
 toast.configure();
 
 const Training2 = () => {
-    const {opening} = useParams();
+    const opening = useParams()["opening"];
+    const guided = useParams()["guided"] === "true";
     const pieces = [null, <FaChessPawn/>, <FaChessRook/>, <FaChessKnight/>, <FaChessBishop/>, <FaChessQueen/>, <FaChessKing/>];
     const numToLetter = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
     const [pieceInHand, setPieceInHand] = useState([]);
     const [playerTeam, setPlayerTeam] = useState(1);
     const openingData = JSON.parse(localStorage.getItem(opening));
+    const openingVariantsList = openingData["variantsList"];
     //const [movesList, setMovesList] = useState("moves");
-    const [boardSetup, setBoardSetup] = useState([[
+    const startingBoard = [
         [22,23,24,25,26,24,23,22],
         [21,21,21,21,21,21,21,21],
         [0,0,0,0,0,0,0,0],
@@ -27,11 +30,14 @@ const Training2 = () => {
         [0,0,0,0,0,0,0,0],
         [11,11,11,11,11,11,11,11],
         [12,13,14,15,16,14,13,12]
-    ], 0, false, "moves"]);
-    const [caseBlue, setCaseBlue] = useState([null, null]);
+    ];
+    const [boardSetup, setBoardSetup] = useState([startingBoard, 0, false, "moves"]);
+    const [caseBlue, setCaseBlue] = useState([null, null]); //changer nom variable
+    const [caseYellow, setCaseYellow] = useState([-1, -1]); //changer nom variable
     const [indicationsCount, setIndicationsCount] = useState(0);
     const [nextRandOpening, setNextRandOpening] = useState("");
     const [reload, setReload] = useState(false);
+    const [variantIndex, setVariantIndex] = useState(0);
 
     useEffect(() => {
         if(caseBlue[1] !== null){
@@ -45,13 +51,25 @@ const Training2 = () => {
 
     
     useEffect(() => {
-        if(boardSetup[2]) computerPlay();
+        if(boardSetup[2]){
+            computerPlay();
+        }else{
+            if(guided){
+                //console.log("Guided : " + guided);
+                displayCaseIndication(boardSetup[1]);
+            }
+        }
     }, [boardSetup]);
 
     useEffect(() => {
         setReload(false);
         if(reload) window.location.reload();
     }, [reload]);
+
+    const testShowBoard = () => {
+        //console.log("Set Case Yellow");
+        setCaseYellow([0, 0]);
+    }
 
     const showGoodMove = () => {
         toast.success('Bon coup !', {
@@ -75,6 +93,28 @@ const Training2 = () => {
         })
     }
 
+    const displayCaseIndication = (nextTurn) => {
+        let nextMove = openingData[boardSetup[3]][nextTurn];
+        if(nextMove[0] === 'c'){
+            //indications = nextMove[1][1] === 'o-o' ? "petit roque" : "grand roque";
+            if(playerTeam === 1){
+                if(nextMove[1][0] === 'w'){
+                    setCaseYellow([7, 4]);
+                }else{
+                    setCaseYellow([0, 4]);
+                }
+            }else{
+                if(nextMove[1][0] === 'w'){
+                    setCaseYellow([0, 3]);
+                }else{
+                    setCaseYellow([7, 3]);
+                }
+            }
+        }else{
+            setCaseYellow(findCase(nextMove[1][0]));
+        }
+    }
+
     const displayMoveIndication = () => {
         //let nextMove = openingData[movesList][boardSetup[1]];
         let nextMove = openingData[boardSetup[3]][boardSetup[1]];
@@ -87,7 +127,7 @@ const Training2 = () => {
         }
 
         setIndicationsCount(indicationsCount + 1);
-
+        displayCaseIndication(boardSetup[1]);
         showMoveIndication(indications);
     }
 
@@ -102,15 +142,35 @@ const Training2 = () => {
         })
     }
 
-    const showTrainingEnd = () => {
-        toast.success('Entrainement Terminé !', {
-            position: 'top-center',
-            autoClose: 2000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: false
-        })
+    const showTrainingEnd = (vIndex) => {
+        if(vIndex === 0){
+            toast.success('Bravo ! Ouverture terminée !', {
+                position: 'top-center',
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: false
+            });
+        }else if(vIndex < 0 ){
+            toast.success(`Bravo ! Variante terminée !`, {
+                position: 'top-center',
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: false
+            });
+        }else{
+            toast.success(`Bravo ! Variante n°${vIndex-1} terminée !`, {
+                position: 'top-center',
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: false
+            });
+        }
     }
     
 
@@ -143,7 +203,7 @@ const Training2 = () => {
     }
 
     const findCase = (notation) => {
-        console.log("findCase notation : " + notation);
+        //console.log("findCase notation : " + notation);
         return [charToLig(notation[1]), charToCol(notation[0])];
     }
 
@@ -171,21 +231,22 @@ const Training2 = () => {
     }
 
     const computerFindNextMoves = (newTurn) => {
-        let movesList = searchForVariants(boardSetup[3], boardSetup[1]);
-        if( movesList.length < 1) return [["", ""], -1];
-        console.log("ok_findNextMove");
+        let movesList = guided === true ? boardSetup[3] : searchForVariants(boardSetup[3], boardSetup[1]);
+        if(movesList === null || movesList.length === 0) return [["", ""], -1];
+        if(openingData[movesList].length <= newTurn) return [["", ""], -1];
+        //console.log("ok_findNextMove");
+        //console.log("New Turn : " + newTurn);
         let nextMoves = [];
-        console.log(openingData[movesList][newTurn][0]);
 
         switch (openingData[movesList][newTurn][0]) {
             case "m":
-                console.log("case : m");
+                //console.log("case : m");
                 nextMoves = openingData[movesList][newTurn][1];
-                console.log(openingData[movesList][newTurn][1]);
+                //console.log(openingData[movesList][newTurn][1]);
                 return [[nextMoves], newTurn, movesList];
 
             case "c":
-                console.log("case : c");
+                //console.log("case : c");
                 let castleNotation = openingData[movesList][newTurn][1];
 
                 return findCastleMoves(castleNotation, newTurn).concat([movesList]);
@@ -205,7 +266,7 @@ const Training2 = () => {
         let piece = "";
 
         moves.forEach(([startNotation, endNotation]) => {
-            console.log([startNotation, endNotation]);
+            //console.log([startNotation, endNotation]);
             startCase = findCase(startNotation);
             endCase = findCase(endNotation);
             piece = newBoard[startCase[0]][startCase[1]];
@@ -229,18 +290,45 @@ const Training2 = () => {
         return randOpeningID;
     }
 
+    const restartTraining = () => {
+        let newBoard = deepCloneArray(startingBoard);
+        let computerCanPlay = false;
+
+        if(playerTeam === 2){
+            newBoard = switchPieces(startingBoard);
+            computerCanPlay = true;
+        } 
+
+        console.log("New Board : " + newBoard);
+
+        if(guided){
+            if(variantIndex+1 >= openingVariantsList.length){
+                setBoardSetup([newBoard, 0, computerCanPlay, openingVariantsList[0]]);
+                setVariantIndex(0);
+                showTrainingEnd(0);
+            }else{
+                showTrainingEnd(variantIndex+1);
+                setBoardSetup([newBoard, 0, computerCanPlay, openingVariantsList[variantIndex+1]]);
+                setVariantIndex(variantIndex+1);
+            }
+        }else{
+            setBoardSetup([newBoard, 0, computerCanPlay, openingVariantsList[0]]);
+            showTrainingEnd(-1);
+        }
+        setNextRandOpening(selectRandomOpening());
+    }
+
     const computerPlay = () => {
         console.log("computer plays turn " + boardSetup[1]);
         //setComputerCanPlay(false);
         let [moves, newTurn2, newMoveList] = computerFindNextMoves(boardSetup[1]);
-        console.log("move : " + moves);
+        //console.log("move : " + moves);
         if(newTurn2 >= 0){
             let newBoard = computerMove(moves, boardSetup[0]);
             setBoardSetup([newBoard, newTurn2+1, false, newMoveList]);
         }else{
             console.log("Entrainement terminé !");
-            showTrainingEnd();
-            setNextRandOpening(selectRandomOpening());
+            restartTraining();
         }
     }
 
@@ -264,50 +352,32 @@ const Training2 = () => {
     }
 
     const checkMoveValidity = (myMove) => {
-        console.log("Check move validity of : " + myMove);
+        //console.log("Check move validity of : " + myMove);
         //console.log("Good move reference : " + goodMove);
         let movesList = boardSetup[3];
         let result = [false, movesList, boardSetup[1]];
 
-        openingData["variantsList"].forEach(variantName => {
-            if(JSON.stringify(openingData[variantName].slice(0, boardSetup[1])) === JSON.stringify(openingData[movesList].slice(0, boardSetup[1]))){
-                if(JSON.stringify(myMove) === JSON.stringify(openingData[variantName][boardSetup[1]])){
-                    movesList = variantName;
-                    result =  [true, movesList, boardSetup[1]];
+        if(!guided){
+            openingData["variantsList"].forEach(variantName => {
+                if(JSON.stringify(openingData[variantName].slice(0, boardSetup[1])) === JSON.stringify(openingData[movesList].slice(0, boardSetup[1]))){
+                    if(JSON.stringify(myMove) === JSON.stringify(openingData[variantName][boardSetup[1]])){
+                        movesList = variantName;
+                        result =  [true, movesList, boardSetup[1]];
+                    }else{
+                        //console.log("My move : " + JSON.stringify(myMove));
+                        //console.log("Test move : " + JSON.stringify(openingData[variantName][boardSetup[1]]));
+                    }
                 }else{
-                    console.log("My move : " + JSON.stringify(myMove));
-                    console.log("Test move : " + JSON.stringify(openingData[variantName][boardSetup[1]]));
+                    //console.log("Variant base : " + JSON.stringify(openingData[variantName].slice(0, boardSetup[1])));
+                    //console.log("MovesList base : " + JSON.stringify(openingData[movesList].slice(0, boardSetup[1])));
                 }
-            }else{
-                console.log("Variant base : " + JSON.stringify(openingData[variantName].slice(0, boardSetup[1])));
-                console.log("MovesList base : " + JSON.stringify(openingData[movesList].slice(0, boardSetup[1])));
-            }
-        })
-
-        
-
-        /*
-        if(goodMove[0] !== 'v'){
-            if(myMove[0] !== goodMove[0]) return [false, movesList, boardSetup[1]];
-            if(myMove[1][0] !== goodMove[1][0] || myMove[1][1] !== goodMove[1][1]) return [false, movesList, boardSetup[1]];
-            result =  [true, movesList, boardSetup[1]];
+            })
         }else{
-            console.log("goodMove[1] : " + goodMove[1]);
-            goodMove[1].forEach(variant => {
-                console.log("Variant : " + variant);
-                console.log(`openingData[${variant}][1] : ` + openingData[variant][1]);
-                let newGoodMove = openingData[variant][1];
-                //if(checkMoveValidity(myMove, newGoodMove)) return [true, variant, 2];
-                if(myMove[0] === newGoodMove[0] && (myMove[1][0] === newGoodMove[1][0] && myMove[1][1] === newGoodMove[1][1])){
-                    console.log("Valid variant : " + variant);
-                    result =  [true, variant, 1];
-                }else{
-                    console.log("myMove : " + myMove);
-                    console.log("newGoodMove : " + newGoodMove);
-                }
-            });
+            if(JSON.stringify(myMove) === JSON.stringify(openingData[movesList][boardSetup[1]])){
+                result =  [true, movesList, boardSetup[1]];
+            }
         }
-        */
+
         return result;
     }
 
@@ -321,6 +391,7 @@ const Training2 = () => {
                     if(pieceInHand[0][0] === l && pieceInHand[0][1] === c){
                         setPieceInHand([]);
                         setCaseBlue([caseBlue[1], null]);
+                        setCaseYellow([-1, -1]);
                     }else{
                         setPieceInHand([[l, c], piece]);
                         setCaseBlue([caseBlue[1], e.currentTarget]);
@@ -330,7 +401,7 @@ const Training2 = () => {
                     let newBoard = boardSetup[0];
                     //console.log(openings[opening][movesList]);
                     let move = ["m", [tupleToNotation([pieceInHand[0][0], pieceInHand[0][1]]), tupleToNotation([l, c]), piece]];
-                    console.log("Check Move Validity : " + checkMoveValidity(move));
+                    //console.log("Check Move Validity : " + checkMoveValidity(move));
                     let [moveValidity, variant, turn] = checkMoveValidity(move);
                     if(moveValidity){
                         console.log("ok_take");
@@ -339,6 +410,7 @@ const Training2 = () => {
                         newBoard[l][c] = pieceInHand[1];
                         setPieceInHand([]);
                         setCaseBlue([caseBlue[1], null]);
+                        setCaseYellow([-1, -1]);
                         //setMovesList(variant);
                         setBoardSetup([newBoard, turn+1, true, variant]);
                     }else{
@@ -348,6 +420,7 @@ const Training2 = () => {
                         console.log(tupleToNotation([l, c]) + " VS " + openingData[movesList][boardSetup[1]][1][1]);
                         setPieceInHand([]);
                         setCaseBlue([caseBlue[1], null]);
+                        setCaseYellow([-1, -1]);
                     }
                 }
             }else{
@@ -362,10 +435,10 @@ const Training2 = () => {
                 let newBoard = deepCloneArray(boardSetup[0]);
                 //console.log(openings[opening][movesList]);
                 let move = ["m", [tupleToNotation([pieceInHand[0][0], pieceInHand[0][1]]), tupleToNotation([l, c]), piece]];
-                console.log("Check Move Validity : " + checkMoveValidity(move));
+                //console.log("Check Move Validity : " + checkMoveValidity(move));
                 let [moveValidity, variant, turn] = checkMoveValidity(move);
                 if(moveValidity){
-                    console.log("ok_move");
+                    //console.log("ok_move");
                     showGoodMove();
                     newBoard[pieceInHand[0][0]][pieceInHand[0][1]] = 0;
                     newBoard[l][c] = pieceInHand[1];
@@ -380,6 +453,7 @@ const Training2 = () => {
                     setPieceInHand([]);
                 }
                 setCaseBlue([caseBlue[1], null]);
+                setCaseYellow([-1, -1]);
                 
             }else{
                 //do nothing
@@ -394,7 +468,10 @@ const Training2 = () => {
             return boardLine.map((boardCase, indexColumn) => {
                 return <div 
                             key={8*indexLine+indexColumn} 
-                            className={findCaseColor(indexLine, indexColumn)} 
+                            className={
+                                findCaseColor(indexLine, indexColumn) + 
+                                (caseYellow[0] === indexLine && caseYellow[1] === indexColumn ?  " hinted" : "")
+                            } 
                             onClick={(e) => chooseAction(e, indexLine, indexColumn, boardCase)}
                         >
                         {
@@ -422,22 +499,23 @@ const Training2 = () => {
             })
         })
 
-    const deepCloneArray = (originArray) => {
-        return JSON.parse(JSON.stringify(originArray));
-        //return __dirname.cloneDeep(originArray);
-    }
+    const switchPieces = (oldBoard) => {
+        let newBoard = deepCloneArray(oldBoard);
 
-    const switchPlayer = (computerCanPlay) => {
-        playerTeam === 1 ? setPlayerTeam(2) : setPlayerTeam(1);
-        let newBoard = deepCloneArray(boardSetup[0]);
-
-        boardSetup[0].forEach((l, iL) => {
+        oldBoard.forEach((l, iL) => {
             l.forEach((c, iC) => {
                 newBoard[7-iL][7-iC] = c;
             })
         })
-        console.log(newBoard);
-        //setBoard(newBoard);
+        //console.log(newBoard);
+
+        return newBoard;
+    }
+
+    const switchPlayer = (computerCanPlay) => {
+        playerTeam === 1 ? setPlayerTeam(2) : setPlayerTeam(1);
+        
+        let newBoard = switchPieces(boardSetup[0]);
         setBoardSetup([newBoard, boardSetup[1], computerCanPlay, boardSetup[3]]);
         return newBoard;
     }
@@ -486,13 +564,13 @@ const Training2 = () => {
     }
 
     const canCastleLong = (team) => {
-        console.log("Team : " + team);
+        //console.log("Team : " + team);
         if(team === 1){
-            console.log("Check Castle Long whites :");
+            //console.log("Check Castle Long whites :");
             if(boardSetup[0][7][1] > 0 || boardSetup[0][7][2] > 0 || boardSetup[0][7][3] > 0) return false;
-            console.log("No Blocking pieces");
+            //console.log("No Blocking pieces");
             if(boardSetup[0][7][0] !== 12 || boardSetup[0][7][4] !== 16) return false;
-            console.log("Rook and King at the right place");
+            //console.log("Rook and King at the right place");
         }else{
             if(boardSetup[0][7][4] > 0 || boardSetup[0][7][5] > 0 || boardSetup[0][7][6] > 0) return false;
             if(boardSetup[0][7][3] !== 26 || boardSetup[0][7][7] !== 22) return false;
@@ -501,14 +579,14 @@ const Training2 = () => {
     }
 
     const castleLong = (team, computerCanPlay) => {
-        console.log("try castleLong");
+        //console.log("try castleLong");
         let movesList = boardSetup[3];
         if(!canCastleLong(team)) return null;
-        console.log("canCastleLong");
+        //console.log("canCastleLong");
         const move = ["c", [team === 1 ? "w" : "b", "o-o-o"]];
         let [moveValidity, variant, turn] = checkMoveValidity(move, openingData[movesList][boardSetup[1]]);
         if(moveValidity){
-            console.log("Castle Long is a valid move");
+            //console.log("Castle Long is a valid move");
             const newBoard = boardSetup[0];
             if(team === 1){
                 newBoard[7][4] = 0;
@@ -525,7 +603,7 @@ const Training2 = () => {
             setBoardSetup([newBoard, turn+1, computerCanPlay, variant]);
             showGoodMove();
         }else{
-            console.log("Mauvais coup !");
+            //console.log("Mauvais coup !");
             showBadMove();
             console.log(move);
             console.log(openingData[movesList][boardSetup[1]]);
@@ -533,7 +611,10 @@ const Training2 = () => {
     }
 
     const computerPlaysIfWhite = () => {
-        if(openingData["playerColor"] === "black" && playerTeam !== 2 && boardSetup[1] === 0){
+        console.log("Test if computer plays :");
+        console.log("Player team : " + playerTeam);
+        if(openingData["playerColor"] === "black" && playerTeam === 1 && boardSetup[1] === 0){
+            console.log("Yes");
             switchPlayer(true);
         }
     }
@@ -547,20 +628,10 @@ const Training2 = () => {
         setBoardSetup([newboard, boardSetup[1]+1, true, boardSetup[3]]);
     }
 
-    //{chessBoard}
-
-    /*
-    {Object.entries(openings).map(openingName => {
-        return <div key={openingName[1]["name"]}><h2>
-            {openingName[1]["name"]}
-        </h2><br/></div>
-    })}
-    */
-
     return (
         <div className="trainingContainer">
             <div className="boardAndMenu">
-                <div className="openingTitle">{openingData["name"]}</div>
+                <div className="openingTitle" onClick={() => testShowBoard()}>{openingData["name"]}</div>
                 <div className="chessBoard">
                     {chessBoard}
                 </div>
