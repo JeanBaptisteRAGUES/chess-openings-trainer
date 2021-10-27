@@ -1,4 +1,4 @@
-.trainingContainer{
+.CO_trainingContainer{
     min-width: 100vh;
     display: flex;
     flex-direction: column;
@@ -7,7 +7,7 @@
     background-color: lightskyblue;
 }
 
-.boardAndMenu{
+.CO_boardAndMenu{
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
     grid-template-rows: 1fr 3fr 1fr;
@@ -15,7 +15,7 @@
     height: 100vh;
 }
 
-.chooseVariant{
+.CO_chooseVariant{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -23,25 +23,25 @@
     margin: 10px;
 }
 
-.previousNextBtn{
+.CO_previousNextBtn{
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 10px;
 }
 
-.scrollingBtn{
+.CO_scrollingBtn{
     font-size: 32px;
     border: 2px solid black;
     margin-left: 20px;
     margin-right: 20px;
 }
 
-.dimmed{
+.CO_dimmed{
     opacity: 0.3;
 }
 
-.openingTitle{
+.CO_openingTitle{
     font-size: 32px;
     grid-row: 1;
     grid-column: 2;
@@ -50,7 +50,7 @@
     font-weight: bold;
 }
 
-.chessBoard{
+.CO_chessBoard{
     height: 600px;
     width: 600px;
     display: flex;
@@ -60,7 +60,7 @@
     grid-column: 2;
 }
 
-.menu{
+.CO_menu{
     height: 400px;
     width: 200px;
     border: 2px solid black;
@@ -73,7 +73,7 @@
     justify-self: center;
 }
 
-.create_whiteCase{
+.CO_create_whiteCase{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -84,25 +84,26 @@
     position: relative;
 }
 
-.create_whiteCase.selected{
+.CO_create_whiteCase.selected{
     background-color: cyan;
 }
 
-.create_blackCase{
+.CO_create_blackCase{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 75px;
     width: 75px;
-    position: relative;   
+    position: relative;
+    background-color: green;   
 }
 
-.create_blackCase.selected{
+.CO_create_blackCase.selected{
     background-color: blue;
 }
 
-.piece{
+.CO_piece{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -111,26 +112,26 @@
     top: 7px;
 }
 
-.pieceBackground{
+.CO_pieceBackground{
     font-size: 60px;
     position: absolute;
     z-index: 0;
     color: black;
 }
 
-.whitePiece{
+.CO_whitePiece{
     z-index: 1;
     font-size: 56px;
     color: white;
 }
 
-.blackPiece{
+.CO_blackPiece{
     z-index: 1;
     font-size: 56px;
     color: black;
 }
 
-.indexLine{
+.CO_indexLine{
     font-size: 16px;
     font-weight: bold;
     position: absolute;
@@ -139,7 +140,7 @@
     z-index: auto;
 }
 
-.indexColumn{
+.CO_indexColumn{
     font-size: 16px;
     font-weight: bold;
     position: absolute;
@@ -148,11 +149,11 @@
     z-index: auto;
 }
 
-.indexColumn{
+.CO_indexColumn{
     position: absolute;
 }
 
-.boardBtnBottom{
+.CO_boardBtnBottom{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -162,11 +163,11 @@
     grid-column: 2;
 }
 
-.castleBtn{
+.CO_castleBtn{
     height: 25px;
 }
 
-.switchPlayerBtn{
+.CO_switchPlayerBtn{
     cursor: pointer;
     font-size: 24px;
 }

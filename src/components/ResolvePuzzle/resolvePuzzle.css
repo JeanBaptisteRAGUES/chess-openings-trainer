@@ -1,4 +1,4 @@
-.trainingContainer{
+.RP_trainingContainer{
     min-width: 100vh;
     display: flex;
     flex-direction: column;
@@ -7,7 +7,7 @@
     background-color: lightskyblue;
 }
 
-.boardAndMenu{
+.RP_boardAndMenu{
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
     grid-template-rows: 1fr 3fr 1fr;
@@ -15,7 +15,7 @@
     height: 100vh;
 }
 
-.openingTitle{
+.RP_openingTitle{
     font-size: 32px;
     grid-row: 1;
     grid-column: 2;
@@ -24,7 +24,7 @@
     font-weight: bold;
 }
 
-.chessBoard{
+.RP_chessBoard{
     height: 600px;
     width: 600px;
     display: flex;
@@ -34,7 +34,7 @@
     grid-column: 2;
 }
 
-.menu{
+.RP_menu{
     height: 400px;
     width: 200px;
     border: 2px solid black;
@@ -44,10 +44,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: start;
+    justify-content: center;
+    justify-self: center;
+    align-self: center;
 }
 
-.training_whiteCase{
+.RP_training_whiteCase{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -58,11 +60,11 @@
     background-color: whitesmoke;
 }
 
-.training_whiteCase.selected{
+.RP_training_whiteCase.selected{
     background-color: cyan;
 }
 
-.training_blackCase{
+.RP_training_blackCase{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -73,11 +75,11 @@
     background-color: green;   
 }
 
-.training_blackCase.selected{
+.RP_training_blackCase.selected{
     background-color: blue;
 }
 
-.piece{
+.RP_piece{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -86,26 +88,26 @@
     top: 7px;
 }
 
-.pieceBackground{
+.RP_pieceBackground{
     font-size: 60px;
     position: absolute;
     z-index: 0;
     color: black;
 }
 
-.whitePiece{
+.RP_whitePiece{
     z-index: 1;
     font-size: 56px;
     color: white;
 }
 
-.blackPiece{
+.RP_blackPiece{
     z-index: 1;
     font-size: 56px;
     color: black;
 }
 
-.indexLine{
+.RP_indexLine{
     font-size: 16px;
     font-weight: bold;
     position: absolute;
@@ -114,7 +116,7 @@
     z-index: auto;
 }
 
-.indexColumn{
+.RP_indexColumn{
     font-size: 16px;
     font-weight: bold;
     position: absolute;
@@ -123,21 +125,23 @@
     z-index: auto;
 }
 
-.boardBtnBottom{
+.RP_boardBtnBottom{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     min-width: 600px;
     margin-top: 10px;
     height: 30px;
+    grid-row: 3;
+    grid-column: 2;
 }
 
-.switchPlayerBtn{
+.RP_switchPlayerBtn{
     cursor: pointer;
     font-size: 24px;
 }
 
-.moveIndicator{
+.RP_moveIndicator{
     font-size: 24px;
     background-color: white;
     border-radius: 45px;

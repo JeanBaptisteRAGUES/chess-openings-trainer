@@ -132,11 +132,11 @@ const Landing = () => {
                     <Link to={'/training2/' + randOpening}>Ouverture aléatoire</Link>
                 </Fragment>
             :
-                <div className="trainingLinks">
-                    <Link to={'/training2/' + opening + '/' + isGuided} className="linkBtn">S'entrainer ({opening})</Link>
-                    <Link to={'/createOpening2/' + opening} className="linkBtn">Modifier({opening})</Link>
-                    <Link to={'/createPuzzle/' + opening} className="linkBtn">Puzzles ({opening})</Link>
-                    <div className="clickableBtn" onClick={() => confirmDeleteOpening()}>Supprimer</div>
+                <div className="L_trainingLinks">
+                    <Link to={'/training2/' + opening + '/' + isGuided} className="L_linkBtn">S'entrainer ({opening})</Link>
+                    <Link to={'/createOpening2/' + opening} className="L_linkBtn">Modifier({opening})</Link>
+                    <Link to={'/createPuzzle/' + opening} className="L_linkBtn">Puzzles ({opening})</Link>
+                    <div className="L_clickableBtn" onClick={() => confirmDeleteOpening()}>Supprimer</div>
                     <p>
                         <input type="checkbox" id="guidedBtn" name="guidedBtn" onClick={() => setIsGuided(!isGuided)}/>
                         <label htmlFor="guidedBtn">Ouverture guidée</label>
@@ -177,7 +177,7 @@ const Landing = () => {
     }
 
     const displayOpeningJSON = opening !== "" && (
-        <div className="openingJSON">
+        <div className="L_openingJSON">
             <h2>{JSON.parse(localStorage.getItem(opening))["name"]} (JSON)</h2>
             <p>
                 {localStorage.getItem(opening)}
@@ -186,7 +186,7 @@ const Landing = () => {
     )
 
     return (
-        <div className="landingContainer">
+        <div className="L_landingContainer">
             <h1 onClick={() => displayOpenings()}>Bienvenue !</h1>
             <p>
                 Ici vous pourrez vous entrainez sur différentes ouvertures d'échecs ainsi que leurs variantes !<br/>
@@ -194,8 +194,8 @@ const Landing = () => {
                 vous vous trompiez, auquel cas un message d'erreur s'affichera.
             </p>
             <br/>
-            <div className="openingMenu">
-                <div className="chooseOpening">
+            <div className="L_openingMenu">
+                <div className="L_chooseOpening">
                     <select onChange={(e) => updateOpening(e)}>
                         <option value=''>--Choisissez une ouverture--</option>
                         <optgroup label="Blancs">
@@ -207,15 +207,15 @@ const Landing = () => {
                     </select>
                     {startTraining}
                 </div>
-                <div className="createOpening">
-                    <input value={newOpeningId} className="createInput" placeholder="Nouvelle ouverture (id)" onChange={(e) => updateNewOpeningId(e)}></input>
-                    <input value={newOpeningName} className="createInput" placeholder="Nouvelle ouverture (nom)" onChange={(e) => updateNewOpeningName(e)}></input>
-                    <select className="createSelector" onChange={(e) => updateNewOpeningColor(e)}>
+                <div className="L_createOpening">
+                    <input value={newOpeningId} className="L_createInput" placeholder="Nouvelle ouverture (id)" onChange={(e) => updateNewOpeningId(e)}></input>
+                    <input value={newOpeningName} className="L_createInput" placeholder="Nouvelle ouverture (nom)" onChange={(e) => updateNewOpeningName(e)}></input>
+                    <select className="L_createSelector" onChange={(e) => updateNewOpeningColor(e)}>
                         <option value=''>--Choisissez une couleur--</option>
                         <option value='white'>Blancs</option>
                         <option value='black'>Noirs</option>
                     </select>
-                    <textarea value={newOpeningJSON} className="createInput" placeholder="JSON de l'ouverture (optionnel)" onChange={(e) => updateNewOpeningJSON(e)}></textarea>
+                    <textarea value={newOpeningJSON} className="L_createInput" placeholder="JSON de l'ouverture (optionnel)" onChange={(e) => updateNewOpeningJSON(e)}></textarea>
                     {createOpening}
                 </div>
                 {displayOpeningJSON}               

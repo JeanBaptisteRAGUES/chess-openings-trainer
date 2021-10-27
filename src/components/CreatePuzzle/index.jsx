@@ -70,11 +70,11 @@ const CreatePuzzle = () => {
     
 
     const findCaseColor = (indexLine, indexColumn) => {
-        return (indexLine+indexColumn) % 2 === 0 ? 'create_whiteCase' : 'create_blackCase';
+        return (indexLine+indexColumn) % 2 === 0 ? 'CP_create_whiteCase' : 'CP_create_blackCase';
     }
 
     const findPieceColor = (boardCase) => {
-        return Math.floor(boardCase/10) === 1 ? 'whitePiece' : 'blackPiece';
+        return Math.floor(boardCase/10) === 1 ? 'CP_whitePiece' : 'CP_blackPiece';
     }
 
     const charToCol = (letter) => {
@@ -411,8 +411,8 @@ const CreatePuzzle = () => {
                         >
                         {
                             boardCase > 0 ?
-                                <div className="piece">
-                                    <div className='pieceBackground'>{pieces[boardCase%10]}</div>
+                                <div className="CP_piece">
+                                    <div className='CP_pieceBackground'>{pieces[boardCase%10]}</div>
                                     <div className={findPieceColor(boardCase)}>{pieces[boardCase%10]}</div>
                                 </div>
                                 :
@@ -420,15 +420,15 @@ const CreatePuzzle = () => {
                         }
                         {
                             playerTeam === 1 ?
-                                indexColumn === 0 ? <div className="indexLine">{8-indexLine}</div> : null
+                                indexColumn === 0 ? <div className="CP_indexLine">{8-indexLine}</div> : null
                             :
-                                indexColumn === 0 ? <div className="indexLine">{indexLine+1}</div> : null
+                                indexColumn === 0 ? <div className="CP_indexLine">{indexLine+1}</div> : null
                         }
                         {
                             playerTeam === 1 ?
-                                indexLine === 7 ? <div className="indexColumn">{numToLetter[indexColumn]}</div> : null
+                                indexLine === 7 ? <div className="CP_indexColumn">{numToLetter[indexColumn]}</div> : null
                             :
-                                indexLine === 7 ? <div className="indexColumn">{numToLetter[7-indexColumn]}</div> : null
+                                indexLine === 7 ? <div className="CP_indexColumn">{numToLetter[7-indexColumn]}</div> : null
                         }
                     </div>
             })
@@ -574,16 +574,16 @@ const CreatePuzzle = () => {
     }
 
     const blackPiecesMenu = pieces.length > 0 && (
-        <div className="piecesMenu">
+        <div className="CP_piecesMenu">
             {
                 pieces.map((piece, i) => {
                     return <div 
                         key={i} 
-                        className="create_whiteCase caseBorder" 
+                        className="CP_create_whiteCase CP_caseBorder" 
                         onClick={() => pickPieceFromMenu(20 + i)}
                     >
-                        <div className="piece">
-                            <div className="blackPiece">{piece}</div>
+                        <div className="CP_piece">
+                            <div className="CP_blackPiece">{piece}</div>
                         </div>
                     </div>
                 })
@@ -592,16 +592,16 @@ const CreatePuzzle = () => {
     )
 
     const whitePiecesMenu = pieces.length > 0 && (
-        <div className="piecesMenu">
+        <div className="CP_piecesMenu">
             {
                 pieces.map((piece, i) => {
                     return <div 
                         key={i} 
-                        className="create_blackCase caseBorder" 
+                        className="CP_create_blackCase CP_caseBorder" 
                         onClick={() => pickPieceFromMenu(10 + i)}
                     >
-                        <div className="piece">
-                            <div className="whitePiece">{piece}</div>
+                        <div className="CP_piece">
+                            <div className="CP_whitePiece">{piece}</div>
                         </div>
                     </div>
                 })
@@ -666,8 +666,8 @@ const CreatePuzzle = () => {
     computerPlaysIfWhite();
 
     const createPuzzleGridBottomMenu = puzzleMode === "createPuzzleGrid" && (
-        <div className="boardBtnBottom">
-            <div className="previousNextBtn">
+        <div className="CP_boardBtnBottom">
+            <div className="CP_previousNextBtn">
                 <button onClick={() => savePuzzle()}>Enregistrer</button>
                 <button onClick={() => resetBoard()}>Supprimer</button>
             </div>
@@ -676,23 +676,23 @@ const CreatePuzzle = () => {
 
     const createPuzzleMovesBottomMenu = puzzleMode === "createPuzzleMoves" && (
         playerTeam === 1 ?
-            <div className="boardBtnBottom">
-                <button className="castleBtn" onClick={() => castleLong(playerTeam, true)}>Castle Long</button>
-                <div className="switchPlayerBtn" onClick={() => switchPlayer()}><GrPowerCycle/></div>
-                <button className="castleBtn" onClick={() => castleShort(playerTeam, true)}>Castle Short</button>
+            <div className="CP_boardBtnBottom">
+                <button className="CP_castleBtn" onClick={() => castleLong(playerTeam, true)}>Castle Long</button>
+                <div className="CP_switchPlayerBtn" onClick={() => switchPlayer()}><GrPowerCycle/></div>
+                <button className="CP_castleBtn" onClick={() => castleShort(playerTeam, true)}>Castle Short</button>
             </div>
         :
-            <div className="boardBtnBottom">
-                <button className="castleBtn" onClick={() => castleShort(playerTeam, true)}>Castle Short</button>
-                <div className="switchPlayerBtn" onClick={() => switchPlayer()}><GrPowerCycle/></div>
-                <button className="castleBtn" onClick={() => castleLong(playerTeam, true)}>Castle Long</button>
+            <div className="CP_boardBtnBottom">
+                <button className="CP_castleBtn" onClick={() => castleShort(playerTeam, true)}>Castle Short</button>
+                <div className="CP_switchPlayerBtn" onClick={() => switchPlayer()}><GrPowerCycle/></div>
+                <button className="CP_castleBtn" onClick={() => castleLong(playerTeam, true)}>Castle Long</button>
             </div>
     )
 
     const createPuzzleMovesSideMenu = selectedPuzzle !== null && (
-        <div className="menu">
-            <div className="chooseVariant">
-                <select className="variantSelector" onChange={(e) => updateVariant(e)}>
+        <div className="CP_menu">
+            <div className="CP_chooseVariant">
+                <select className="CP_variantSelector" onChange={(e) => updateVariant(e)}>
                     <option value=''>--Choisissez une variante--</option>
                     {variantsDisplay}
                 </select>
@@ -700,27 +700,27 @@ const CreatePuzzle = () => {
                     selectedVariant !== "" ?
                         <button onClick={() => chooseVariant()}>Choisir</button>
                     :
-                    <button className="dimmed">Choisir</button>
+                    <button className="CP_dimmed">Choisir</button>
                 }
             </div>
-            <div className="previousNextBtn">
+            <div className="CP_previousNextBtn">
                 {
                     boardSetup[1] > 0 ?
-                        <div className="scrollingBtn" onClick={() => previous()}>
+                        <div className="CP_scrollingBtn" onClick={() => previous()}>
                             <GrPrevious/>
                         </div>
                     :
-                        <div className="scrollingBtn dimmed">
+                        <div className="CP_scrollingBtn CP_dimmed">
                             <GrPrevious/>
                         </div>
                 }
                 {
                     boardSetup[1] < (selectedPuzzle[movesList].length) ?
-                        <div className="scrollingBtn" onClick={() => next()}>
+                        <div className="CP_scrollingBtn" onClick={() => next()}>
                             <GrNext/>
                         </div>
                     :
-                        <div className="scrollingBtn dimmed">
+                        <div className="CP_scrollingBtn CP_dimmed">
                             <GrNext/>
                         </div>
                 }
@@ -729,15 +729,15 @@ const CreatePuzzle = () => {
     )
 
     const selectPuzzleBottomMenu = puzzleMode === "selectPuzzle" && (
-        <div className="boardBtnBottom">
-            <div className="previousNextBtn">
+        <div className="CP_boardBtnBottom">
+            <div className="CP_previousNextBtn">
                     {
                         puzzleIndex > 0 ?
-                            <div className="scrollingBtn" onClick={() => previousPuzzle()}>
+                            <div className="CP_scrollingBtn" onClick={() => previousPuzzle()}>
                                 <GrPrevious/>
                             </div>
                         :
-                            <div className="scrollingBtn dimmed">
+                            <div className="CP_scrollingBtn CP_dimmed">
                                 <GrPrevious/>
                             </div>
                     }
@@ -748,16 +748,16 @@ const CreatePuzzle = () => {
                             <Fragment>
                                 <button onClick={() => setPuzzleMode("createPuzzleMoves")}>Définir les coups</button>
                                 <button onClick={() => confirmDeletePuzzle()}>Supprimer</button>
-                                <Link to={'/resolvepuzzle/' + openingPuzzleId + '/' + (puzzleIndex-1) + '/' + false} className="linkBtn">Jouer</Link>
+                                <Link to={'/resolvepuzzle/' + openingPuzzleId + '/' + (puzzleIndex-1) + '/' + false} className="CP_linkBtn">Jouer</Link>
                             </Fragment>
                     }
                     {
                         puzzleIndex < (openingPuzzle["puzzles"].length) ?
-                            <div className="scrollingBtn" onClick={() => nextPuzzle()}>
+                            <div className="CP_scrollingBtn" onClick={() => nextPuzzle()}>
                                 <GrNext/>
                             </div>
                         :
-                            <div className="scrollingBtn dimmed">
+                            <div className="CP_scrollingBtn CP_dimmed">
                                 <GrNext/>
                             </div>
                     }
@@ -766,12 +766,12 @@ const CreatePuzzle = () => {
     )
 
     return (
-        <div className="trainingContainer">
-            <div className="boardAndMenu">
-                <div className="openingTitle" onClick={() => displayOpeningData()}>{openingData["name"] + " Puzzles"}</div>
-                <div className="boardUI">
+        <div className="CP_trainingContainer">
+            <div className="CP_boardAndMenu">
+                <div className="CP_openingTitle" onClick={() => displayOpeningData()}>{openingData["name"] + " Puzzles"}</div>
+                <div className="CP_boardUI">
                     {puzzleMode === "createPuzzleGrid" ? blackPiecesMenu : null}
-                    <div className="chessBoard">
+                    <div className="CP_chessBoard">
                         {chessBoard}
                     </div>
                     {puzzleMode === "createPuzzleGrid" ? whitePiecesMenu : null}

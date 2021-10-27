@@ -1,37 +1,37 @@
-.landingContainer{
+.L_landingContainer{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.openingMenu{
+.L_openingMenu{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.trainingLinks{
+.L_trainingLinks{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.linkBtn{
+.L_linkBtn{
     text-decoration: none;
     color: black;
     margin-top: 15px;
 }
 
-.clickableBtn{
+.L_clickableBtn{
     cursor: pointer;
     color: black;
     margin-top: 15px;
 }
 
-.chooseOpening{
+.L_chooseOpening{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -42,7 +42,7 @@
     min-height: 200px;
 }
 
-.createOpening{
+.L_createOpening{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -53,15 +53,15 @@
     min-height: 200px;
 }
 
-.createInput{
+.L_createInput{
     margin: 5px;
 }
 
-.createSelector{
+.L_createSelector{
     margin: 5px;
 }
 
-.openingJSON{
+.L_openingJSON{
     display: flex;
     flex-wrap: wrap;
     width: 500px;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import './training2.css';
+import './resolvePuzzle.css';
 import {FaChessPawn, FaChessRook, FaChessKnight, FaChessBishop, FaChessQueen, FaChessKing} from 'react-icons/fa';
 import {GrPowerCycle} from 'react-icons/gr';
 import {BsQuestionCircle} from 'react-icons/bs';
@@ -118,11 +118,11 @@ const ResolvePuzzle = () => {
     
 
     const findCaseColor = (indexLine, indexColumn) => {
-        return (indexLine+indexColumn) % 2 === 0 ? 'training_whiteCase' : 'training_blackCase';
+        return (indexLine+indexColumn) % 2 === 0 ? 'RP_training_whiteCase' : 'RP_training_blackCase';
     }
 
     const findPieceColor = (boardCase) => {
-        return Math.floor(boardCase/10) === 1 ? 'whitePiece' : 'blackPiece';
+        return Math.floor(boardCase/10) === 1 ? 'RP_whitePiece' : 'RP_blackPiece';
     }
 
     const charToCol = (letter) => {
@@ -427,8 +427,8 @@ const ResolvePuzzle = () => {
                         >
                         {
                             boardCase > 0 ?
-                                <div className="piece">
-                                    <div className='pieceBackground'>{pieces[boardCase%10]}</div>
+                                <div className="RP_piece">
+                                    <div className='RP_pieceBackground'>{pieces[boardCase%10]}</div>
                                     <div className={findPieceColor(boardCase)}>{pieces[boardCase%10]}</div>
                                 </div>
                                 :
@@ -436,15 +436,15 @@ const ResolvePuzzle = () => {
                         }
                         {
                             playerTeam === 1 ?
-                                indexColumn === 0 ? <div className="indexLine">{8-indexLine}</div> : null
+                                indexColumn === 0 ? <div className="RP_indexLine">{8-indexLine}</div> : null
                             :
-                                indexColumn === 0 ? <div className="indexLine">{indexLine+1}</div> : null
+                                indexColumn === 0 ? <div className="RP_indexLine">{indexLine+1}</div> : null
                         }
                         {
                             playerTeam === 1 ?
-                                indexLine === 7 ? <div className="indexColumn">{numToLetter[indexColumn]}</div> : null
+                                indexLine === 7 ? <div className="RP_indexColumn">{numToLetter[indexColumn]}</div> : null
                             :
-                                indexLine === 7 ? <div className="indexColumn">{numToLetter[7-indexColumn]}</div> : null
+                                indexLine === 7 ? <div className="RP_indexColumn">{numToLetter[7-indexColumn]}</div> : null
                         }
                     </div>
             })
@@ -573,25 +573,15 @@ const ResolvePuzzle = () => {
         setBoardSetup([newboard, boardSetup[1]+1, true, boardSetup[3]]);
     }
 
-    //{chessBoard}
-
-    /*
-    {Object.entries(openings).map(openingName => {
-        return <div key={openingName[1]["name"]}><h2>
-            {openingName[1]["name"]}
-        </h2><br/></div>
-    })}
-    */
-
     return (
-        <div className="trainingContainer">
-            <div className="boardAndMenu">
-                <div className="openingTitle">{openingPuzzles["name"]}</div>
-                <div className="chessBoard">
+        <div className="RP_trainingContainer">
+            <div className="RP_boardAndMenu">
+                <div className="RP_openingTitle">{openingPuzzles["name"]}</div>
+                <div className="RP_chessBoard">
                     {chessBoard}
                 </div>
-                <div className="menu">
-                    <BsQuestionCircle className="moveIndicator" onClick={() => displayMoveIndication()}/>
+                <div className="RP_menu">
+                    <BsQuestionCircle className="RP_moveIndicator" onClick={() => displayMoveIndication()}/>
                     <button onClick={() => window.location.reload()}>Rejouer</button>
                     {nextRandPuzzle[0] !== null ? <Link 
                                                     to={'/resolvepuzzle/' + nextRandPuzzle[0] + '/' + nextRandPuzzle[1] + '/' + isRandom}
@@ -600,15 +590,15 @@ const ResolvePuzzle = () => {
                 </div>
                 {
                         playerTeam === 1 ?
-                            <div className="boardBtnBottom">
+                            <div className="RP_boardBtnBottom">
                                 <button onClick={() => castleLong(playerTeam, true)}>Castle Long</button>
-                                <div className="switchPlayerBtn" onClick={() => switchPlayer()}><GrPowerCycle/></div>
+                                <div className="RP_switchPlayerBtn" onClick={() => switchPlayer()}><GrPowerCycle/></div>
                                 <button onClick={() => castleShort(playerTeam, true)}>Castle Short</button>
                             </div>
                         :
-                            <div className="boardBtnBottom">
+                            <div className="RP_boardBtnBottom">
                                 <button onClick={() => castleShort(playerTeam, true)}>Castle Short</button>
-                                <div className="switchPlayerBtn" onClick={() => switchPlayer()}><GrPowerCycle/></div>
+                                <div className="RP_switchPlayerBtn" onClick={() => switchPlayer()}><GrPowerCycle/></div>
                                 <button onClick={() => castleLong(playerTeam, true)}>Castle Long</button>
                             </div>
                 }

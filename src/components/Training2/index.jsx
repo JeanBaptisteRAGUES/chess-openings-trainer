@@ -175,11 +175,11 @@ const Training2 = () => {
     
 
     const findCaseColor = (indexLine, indexColumn) => {
-        return (indexLine+indexColumn) % 2 === 0 ? 'training_whiteCase' : 'training_blackCase';
+        return (indexLine+indexColumn) % 2 === 0 ? 'T_training_whiteCase' : 'T_training_blackCase';
     }
 
     const findPieceColor = (boardCase) => {
-        return Math.floor(boardCase/10) === 1 ? 'whitePiece' : 'blackPiece';
+        return Math.floor(boardCase/10) === 1 ? 'T_whitePiece' : 'T_blackPiece';
     }
 
     const charToCol = (letter) => {
@@ -476,8 +476,8 @@ const Training2 = () => {
                         >
                         {
                             boardCase > 0 ?
-                                <div className="piece">
-                                    <div className='pieceBackground'>{pieces[boardCase%10]}</div>
+                                <div className="T_piece">
+                                    <div className='T_pieceBackground'>{pieces[boardCase%10]}</div>
                                     <div className={findPieceColor(boardCase)}>{pieces[boardCase%10]}</div>
                                 </div>
                                 :
@@ -485,15 +485,15 @@ const Training2 = () => {
                         }
                         {
                             playerTeam === 1 ?
-                                indexColumn === 0 ? <div className="indexLine">{8-indexLine}</div> : null
+                                indexColumn === 0 ? <div className="T_indexLine">{8-indexLine}</div> : null
                             :
-                                indexColumn === 0 ? <div className="indexLine">{indexLine+1}</div> : null
+                                indexColumn === 0 ? <div className="T_indexLine">{indexLine+1}</div> : null
                         }
                         {
                             playerTeam === 1 ?
-                                indexLine === 7 ? <div className="indexColumn">{numToLetter[indexColumn]}</div> : null
+                                indexLine === 7 ? <div className="T_indexColumn">{numToLetter[indexColumn]}</div> : null
                             :
-                                indexLine === 7 ? <div className="indexColumn">{numToLetter[7-indexColumn]}</div> : null
+                                indexLine === 7 ? <div className="T_indexColumn">{numToLetter[7-indexColumn]}</div> : null
                         }
                     </div>
             })
@@ -629,14 +629,14 @@ const Training2 = () => {
     }
 
     return (
-        <div className="trainingContainer">
-            <div className="boardAndMenu">
-                <div className="openingTitle" onClick={() => testShowBoard()}>{openingData["name"]}</div>
-                <div className="chessBoard">
+        <div className="T_trainingContainer">
+            <div className="T_boardAndMenu">
+                <div className="T_openingTitle" onClick={() => testShowBoard()}>{openingData["name"]}</div>
+                <div className="T_chessBoard">
                     {chessBoard}
                 </div>
-                <div className="menu">
-                    <BsQuestionCircle className="moveIndicator" onClick={() => displayMoveIndication()}/>
+                <div className="T_menu">
+                    <BsQuestionCircle className="T_moveIndicator" onClick={() => displayMoveIndication()}/>
                     <button onClick={() => window.location.reload()}>Rejouer</button>
                     {nextRandOpening !== "" ? <Link 
                         to={'/training2/' + nextRandOpening}
@@ -645,15 +645,15 @@ const Training2 = () => {
                 </div>
                 {
                         playerTeam === 1 ?
-                            <div className="boardBtnBottom">
+                            <div className="T_boardBtnBottom">
                                 <button onClick={() => castleLong(playerTeam, true)}>Castle Long</button>
-                                <div className="switchPlayerBtn" onClick={() => switchPlayer()}><GrPowerCycle/></div>
+                                <div className="T_switchPlayerBtn" onClick={() => switchPlayer()}><GrPowerCycle/></div>
                                 <button onClick={() => castleShort(playerTeam, true)}>Castle Short</button>
                             </div>
                         :
-                            <div className="boardBtnBottom">
+                            <div className="T_boardBtnBottom">
                                 <button onClick={() => castleShort(playerTeam, true)}>Castle Short</button>
-                                <div className="switchPlayerBtn" onClick={() => switchPlayer()}><GrPowerCycle/></div>
+                                <div className="T_switchPlayerBtn" onClick={() => switchPlayer()}><GrPowerCycle/></div>
                                 <button onClick={() => castleLong(playerTeam, true)}>Castle Long</button>
                             </div>
                 }

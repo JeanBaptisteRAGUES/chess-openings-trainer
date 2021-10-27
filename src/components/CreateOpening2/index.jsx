@@ -41,11 +41,11 @@ const CreateOpening2 = () => {
     
 
     const findCaseColor = (indexLine, indexColumn) => {
-        return (indexLine+indexColumn) % 2 === 0 ? 'create_whiteCase' : 'create_blackCase';
+        return (indexLine+indexColumn) % 2 === 0 ? 'CO_create_whiteCase' : 'CO_create_blackCase';
     }
 
     const findPieceColor = (boardCase) => {
-        return Math.floor(boardCase/10) === 1 ? 'whitePiece' : 'blackPiece';
+        return Math.floor(boardCase/10) === 1 ? 'CO_whitePiece' : 'CO_blackPiece';
     }
 
     const charToCol = (letter) => {
@@ -376,8 +376,8 @@ const CreateOpening2 = () => {
                         >
                         {
                             boardCase > 0 ?
-                                <div className="piece">
-                                    <div className='pieceBackground'>{pieces[boardCase%10]}</div>
+                                <div className="CO_piece">
+                                    <div className='CO_pieceBackground'>{pieces[boardCase%10]}</div>
                                     <div className={findPieceColor(boardCase)}>{pieces[boardCase%10]}</div>
                                 </div>
                                 :
@@ -385,15 +385,15 @@ const CreateOpening2 = () => {
                         }
                         {
                             playerTeam === 1 ?
-                                indexColumn === 0 ? <div className="indexLine">{8-indexLine}</div> : null
+                                indexColumn === 0 ? <div className="CO_indexLine">{8-indexLine}</div> : null
                             :
-                                indexColumn === 0 ? <div className="indexLine">{indexLine+1}</div> : null
+                                indexColumn === 0 ? <div className="CO_indexLine">{indexLine+1}</div> : null
                         }
                         {
                             playerTeam === 1 ?
-                                indexLine === 7 ? <div className="indexColumn">{numToLetter[indexColumn]}</div> : null
+                                indexLine === 7 ? <div className="CO_indexColumn">{numToLetter[indexColumn]}</div> : null
                             :
-                                indexLine === 7 ? <div className="indexColumn">{numToLetter[7-indexColumn]}</div> : null
+                                indexLine === 7 ? <div className="CO_indexColumn">{numToLetter[7-indexColumn]}</div> : null
                         }
                     </div>
             })
@@ -533,15 +533,15 @@ const CreateOpening2 = () => {
     }    
 
     return (
-        <div className="trainingContainer">
-            <div className="boardAndMenu">
-                <div className="openingTitle" onClick={() => displayOpeningData()}>{openingData['name']}</div>
-                <div className="chessBoard">
+        <div className="CO_trainingContainer">
+            <div className="CO_boardAndMenu">
+                <div className="CO_openingTitle" onClick={() => displayOpeningData()}>{openingData['name']}</div>
+                <div className="CO_chessBoard">
                     {chessBoard}
                 </div>
-                <div className="menu">
-                    <div className="chooseVariant">
-                        <select className="variantSelector" onChange={(e) => updateVariant(e)}>
+                <div className="CO_menu">
+                    <div className="CO_chooseVariant">
+                        <select className="CO_variantSelector" onChange={(e) => updateVariant(e)}>
                             <option value=''>--Choisissez une variante--</option>
                             {variantsDisplay}
                         </select>
@@ -549,27 +549,27 @@ const CreateOpening2 = () => {
                             selectedVariant !== "" ?
                                 <button onClick={() => chooseVariant()}>Choisir</button>
                             :
-                            <button className="dimmed">Choisir</button>
+                            <button className="CO_dimmed">Choisir</button>
                         }
                     </div>
-                    <div className="previousNextBtn">
+                    <div className="CO_previousNextBtn">
                         {
                             boardSetup[1] > 0 ?
-                                <div className="scrollingBtn" onClick={() => previous()}>
+                                <div className="CO_scrollingBtn" onClick={() => previous()}>
                                     <GrPrevious/>
                                 </div>
                             :
-                                <div className="scrollingBtn dimmed">
+                                <div className="CO_scrollingBtn CO_dimmed">
                                     <GrPrevious/>
                                 </div>
                         }
                         {
                             boardSetup[1] < (openingData[movesList].length) ?
-                                <div className="scrollingBtn" onClick={() => next()}>
+                                <div className="CO_scrollingBtn" onClick={() => next()}>
                                     <GrNext/>
                                 </div>
                             :
-                                <div className="scrollingBtn dimmed">
+                                <div className="CO_scrollingBtn CO_dimmed">
                                     <GrNext/>
                                 </div>
                         }
@@ -577,16 +577,16 @@ const CreateOpening2 = () => {
                 </div>
                 {
                     playerTeam === 1 ?
-                        <div className="boardBtnBottom">
-                            <button className="castleBtn" onClick={() => castleLong(playerTeam, true)}>Castle Long</button>
-                            <div className="switchPlayerBtn" onClick={() => switchPlayer()}><GrPowerCycle/></div>
-                            <button className="castleBtn" onClick={() => castleShort(playerTeam, true)}>Castle Short</button>
+                        <div className="CO_boardBtnBottom">
+                            <button className="CO_castleBtn" onClick={() => castleLong(playerTeam, true)}>Castle Long</button>
+                            <div className="CO_switchPlayerBtn" onClick={() => switchPlayer()}><GrPowerCycle/></div>
+                            <button className="CO_castleBtn" onClick={() => castleShort(playerTeam, true)}>Castle Short</button>
                         </div>
                     :
-                        <div className="boardBtnBottom">
-                            <button className="castleBtn" onClick={() => castleShort(playerTeam, true)}>Castle Short</button>
-                            <div className="switchPlayerBtn" onClick={() => switchPlayer()}><GrPowerCycle/></div>
-                            <button className="castleBtn" onClick={() => castleLong(playerTeam, true)}>Castle Long</button>
+                        <div className="CO_boardBtnBottom">
+                            <button className="CO_castleBtn" onClick={() => castleShort(playerTeam, true)}>Castle Short</button>
+                            <div className="CO_switchPlayerBtn" onClick={() => switchPlayer()}><GrPowerCycle/></div>
+                            <button className="CO_castleBtn" onClick={() => castleLong(playerTeam, true)}>Castle Long</button>
                         </div>
                 }
             </div>
