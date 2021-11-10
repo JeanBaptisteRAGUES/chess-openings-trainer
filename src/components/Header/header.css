@@ -1,0 +1,24 @@
+.H_container{
+    height: 50px;
+    min-width: 100vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: chocolate;
+}
+
+.H_links{
+    height: 50px;
+    min-width: 600px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.H_link{
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+}

@@ -1,0 +1,131 @@
+.O_openingMenu{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 100vw;
+}
+
+.O_trainingLinks{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width: 600px;
+    height: 600px;
+}
+
+.O_linkBtn{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: chocolate;
+    margin-top: 15px;
+    width: 300px;
+    height: 300px;
+}
+
+.O_clickableBtn{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: chocolate;
+    margin-top: 15px;
+    width: 300px;
+    height: 300px;
+}
+
+.O_optionsContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 1000px;
+}
+
+.O_chooseOpening{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    min-width: 100vw;
+    min-height: 200px;
+}
+
+.O_createOpening{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    margin: 20px;
+    min-width: 300px;
+    min-height: 200px;
+}
+
+.O_createInput{
+    margin: 5px;
+}
+
+.O_createSelector{
+    margin: 5px;
+}
+
+.O_openingJSON{
+    display: flex;
+    flex-wrap: wrap;
+    width: 500px;
+    height: 300px;
+    border: 2px solid black;
+    justify-content: center;
+    align-items: center;
+    text-overflow: clip;
+    text-align: left;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: auto;
+}
+
+.O_menu{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    min-width: 100vh;
+}
+
+.O_choiceContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: chocolate;
+}
+
+.O_choiceBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 200px;
+    border: 2px solid chocolate;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.O_choiceIcon{
+    font-size: 164px;
+}
+
+.O_choiceSubtitle{
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+}

@@ -1,0 +1,173 @@
+.MO_trainingContainer{
+    min-width: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: lightskyblue;
+}
+
+.MO_boardAndMenu{
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: 1fr 3fr 1fr;
+    min-width: 100vh;
+    height: 100vh;
+}
+
+.MO_chooseVariant{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.MO_previousNextBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.MO_scrollingBtn{
+    font-size: 32px;
+    border: 2px solid black;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.MO_dimmed{
+    opacity: 0.3;
+}
+
+.MO_openingTitle{
+    font-size: 32px;
+    grid-row: 1;
+    grid-column: 2;
+    align-self: center;
+    justify-self: center;
+    font-weight: bold;
+}
+
+.MO_chessBoard{
+    height: 600px;
+    width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    border: 2px black solid;
+    grid-row: 2;
+    grid-column: 2;
+}
+
+.MO_menu{
+    height: 400px;
+    width: 200px;
+    border: 2px solid black;
+    background-color: white;
+    grid-row: 2;
+    grid-column: 3;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-self: center;
+}
+
+.MO_create_whiteCase{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 75px;
+    width: 75px;
+    background-color: whitesmoke;
+    position: relative;
+}
+
+.MO_create_whiteCase.selected{
+    background-color: cyan;
+}
+
+.MO_create_blackCase{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 75px;
+    width: 75px;
+    position: relative;
+    background-color: green;   
+}
+
+.MO_create_blackCase.selected{
+    background-color: blue;
+}
+
+.MO_piece{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 7px;
+}
+
+.MO_pieceBackground{
+    font-size: 60px;
+    position: absolute;
+    z-index: 0;
+    color: black;
+}
+
+.MO_whitePiece{
+    z-index: 1;
+    font-size: 56px;
+    color: white;
+}
+
+.MO_blackPiece{
+    z-index: 1;
+    font-size: 56px;
+    color: black;
+}
+
+.MO_indexLine{
+    font-size: 16px;
+    font-weight: bold;
+    position: absolute;
+    top: 0px;
+    left: 3px;
+    z-index: auto;
+}
+
+.MO_indexColumn{
+    font-size: 16px;
+    font-weight: bold;
+    position: absolute;
+    bottom: 0px;
+    right: 3px;
+    z-index: auto;
+}
+
+.MO_indexColumn{
+    position: absolute;
+}
+
+.MO_boardBtnBottom{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    min-width: 600px;
+    margin-top: 10px;
+    grid-row: 3;
+    grid-column: 2;
+}
+
+.MO_castleBtn{
+    height: 25px;
+}
+
+.MO_switchPlayerBtn{
+    cursor: pointer;
+    font-size: 24px;
+}

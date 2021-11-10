@@ -1,0 +1,117 @@
+.L_landingContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 100vh;
+    min-height: 100vh;
+    background-color: whitesmoke;
+}
+
+.L_openingMenu{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.L_trainingLinks{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.L_linkBtn{
+    text-decoration: none;
+    color: black;
+    margin-top: 15px;
+}
+
+.L_clickableBtn{
+    cursor: pointer;
+    color: black;
+    margin-top: 15px;
+}
+
+.L_chooseOpening{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    margin: 20px;
+    min-width: 300px;
+    min-height: 200px;
+}
+
+.L_createOpening{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    margin: 20px;
+    min-width: 300px;
+    min-height: 200px;
+}
+
+.L_createInput{
+    margin: 5px;
+}
+
+.L_createSelector{
+    margin: 5px;
+}
+
+.L_openingJSON{
+    display: flex;
+    flex-wrap: wrap;
+    width: 500px;
+    height: 300px;
+    border: 2px solid black;
+    justify-content: center;
+    align-items: center;
+    text-overflow: clip;
+    text-align: left;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: auto;
+}
+
+.L_menu{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    min-width: 100vh;
+}
+
+.L_choiceContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: chocolate;
+}
+
+.L_choiceBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 200px;
+    border: 2px solid chocolate;
+    border-radius: 5px;
+}
+
+.L_choiceIcon{
+    font-size: 164px;
+}
+
+.L_choiceSubtitle{
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+}

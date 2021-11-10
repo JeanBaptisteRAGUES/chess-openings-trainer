@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Fragment } from 'react/cjs/react.production.min';
-import './landing.css';
+import './landing2.css';
+import {HiPuzzle} from 'react-icons/hi';
+import { FaChessBoard } from 'react-icons/fa';
 const openingsList = JSON.parse(localStorage.getItem("openingsList"));
 
 if(openingsList == null){
@@ -9,8 +11,7 @@ if(openingsList == null){
     localStorage.setItem("openingsList", JSON.stringify({"openings": []}));
 }
 
-
-const Landing = () => {
+const Landing2 = () => {
     const [opening, setOpening] = useState('');
     const [newOpeningId, setNewOpeningId] = useState('');
     const [newOpeningName, setNewOpeningName] = useState('');
@@ -38,12 +39,6 @@ const Landing = () => {
     const updateNewOpeningJSON = (e) => {
         setNewOpeningJSON(e.target.value);
     }
-
-    /*
-    useEffect(() => {
-        console.log(newOpeningName);
-    }, [newOpeningName])
-    */
 
     const createNewOpening = () => {
         openingsList["openings"] = openingsList["openings"].concat([[newOpeningId, newOpeningColor, newOpeningName]]);
@@ -186,34 +181,22 @@ const Landing = () => {
                 vous vous trompiez, auquel cas un message d'erreur s'affichera.
             </p>
             <br/>
-            <div className="L_openingMenu">
-                <div className="L_chooseOpening">
-                    <select onChange={(e) => updateOpening(e)}>
-                        <option value=''>--Choisissez une ouverture--</option>
-                        <optgroup label="Blancs">
-                            {displayOpeningsWhite}
-                        </optgroup>
-                        <optgroup label="Noirs">
-                            {displayOpeningsBlack}
-                        </optgroup>
-                    </select>
-                    {startTraining}
-                </div>
-                <div className="L_createOpening">
-                    <input value={newOpeningId} className="L_createInput" placeholder="Nouvelle ouverture (id)" onChange={(e) => updateNewOpeningId(e)}></input>
-                    <input value={newOpeningName} className="L_createInput" placeholder="Nouvelle ouverture (nom)" onChange={(e) => updateNewOpeningName(e)}></input>
-                    <select className="L_createSelector" onChange={(e) => updateNewOpeningColor(e)}>
-                        <option value=''>--Choisissez une couleur--</option>
-                        <option value='white'>Blancs</option>
-                        <option value='black'>Noirs</option>
-                    </select>
-                    <textarea value={newOpeningJSON} className="L_createInput" placeholder="JSON de l'ouverture (optionnel)" onChange={(e) => updateNewOpeningJSON(e)}></textarea>
-                    {createOpening}
-                </div>
-                {displayOpeningJSON}               
+            <div className="L_menu">
+                <Link to="/puzzles" className="L_choiceContainer">
+                    <div className="L_choiceBox">
+                        <HiPuzzle className="L_choiceIcon"/>
+                    </div>
+                    <span className="L_choiceSubtitle">Puzzles</span>
+                </Link>
+                <Link to="/openings"  className="L_choiceContainer">
+                    <div className="L_choiceBox">
+                        <FaChessBoard className="L_choiceIcon"/>
+                    </div>
+                    <span className="L_choiceSubtitle">Ouvertures</span>
+                </Link>
             </div>
         </div>
     )
 }
 
-export default Landing;
+export default Landing2;
