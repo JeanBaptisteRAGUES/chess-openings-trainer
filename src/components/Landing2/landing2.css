@@ -1,11 +1,22 @@
 .L_landingContainer{
+    background: url('../../images/chess03.jpg') no-repeat center center fixed;
+    background-size: cover;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     min-width: 100vh;
     min-height: 100vh;
     background-color: whitesmoke;
+}
+
+.L_welcome{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    margin-top: 50px;
 }
 
 .L_openingMenu{

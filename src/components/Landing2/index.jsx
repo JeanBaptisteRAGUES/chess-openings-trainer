@@ -174,12 +174,14 @@ const Landing2 = () => {
 
     return (
         <div className="L_landingContainer">
-            <h1 onClick={() => displayOpenings()}>Bienvenue !</h1>
-            <p>
-                Ici vous pourrez vous entrainez sur différentes ouvertures d'échecs ainsi que leurs variantes !<br/>
-                Une fois une ouverture sélectionnée, l'ordinateur va jouer les coups enregistrés jusqu'à ce que <br/>
-                vous vous trompiez, auquel cas un message d'erreur s'affichera.
-            </p>
+            <div className="L_welcome">
+                <h1 onClick={() => displayOpenings()}>Bienvenue !</h1>
+                <p>
+                    Ici vous pourrez vous entrainez sur différentes ouvertures d'échecs ainsi que leurs variantes !<br/>
+                    Une fois une ouverture sélectionnée, l'ordinateur va jouer les coups enregistrés jusqu'à ce que <br/>
+                    vous vous trompiez, auquel cas un message d'erreur s'affichera.
+                </p>
+            </div>
             <br/>
             <div className="L_menu">
                 <Link to="/puzzles" className="L_choiceContainer">
