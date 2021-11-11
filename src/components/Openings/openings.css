@@ -100,6 +100,29 @@
     min-width: 100vh;
 }
 
+.O_containerJSON{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    z-index: 2;
+    height: 600px;
+    width: 600px;
+    border: 5px solid chocolate;
+    background-color: white;
+}
+
+.O_openingDataJSON{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    overflow: auto;
+    height: 570px;
+    width: 600px;
+}
+
 .O_choiceContainer{
     display: flex;
     flex-direction: column;

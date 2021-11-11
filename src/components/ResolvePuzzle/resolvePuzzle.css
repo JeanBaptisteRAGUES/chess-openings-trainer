@@ -72,7 +72,7 @@
     height: 75px;
     width: 75px;
     position: relative;
-    background-color: green;   
+    background-color: rgb(120, 80, 80);   
 }
 
 .RP_training_blackCase.selected{

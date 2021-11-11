@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react/cjs/react.development';
+import './createopening.css';
 const openingsList = JSON.parse(localStorage.getItem("openingsList"));
 
 if(openingsList == null){
@@ -44,11 +45,12 @@ const CreateOpening = () => {
         setNewOpeningName("");
         setNewOpeningColor("");
         setNewOpeningJSON("");
+        window.location.reload();
         console.log(openingsList);
         console.log(localStorage.getItem(newOpeningId));
     }
 
-    const createOpening = newOpeningName.length < 5 || newOpeningId.length < 5 || newOpeningColor.length === 0 ?
+    const createOpening = newOpeningName.length < 1 || newOpeningId.length < 1 || newOpeningColor.length === 0 ?
             <p>Entrez les paramètres de votre nouvelle ouverture</p>
         :
             newOpeningId.match(/^[0-9a-zA-Z]+$/) ?
@@ -57,16 +59,19 @@ const CreateOpening = () => {
                 <p>Pour l'identifiant, seuls les caractères alphanumériques sont autorisés !</p>
 
     return (
-        <div className="L_createOpening">
-            <input value={newOpeningId} className="L_createInput" placeholder="Nouvelle ouverture (id)" onChange={(e) => updateNewOpeningId(e)}></input>
-            <input value={newOpeningName} className="L_createInput" placeholder="Nouvelle ouverture (nom)" onChange={(e) => updateNewOpeningName(e)}></input>
-            <select className="L_createSelector" onChange={(e) => updateNewOpeningColor(e)}>
-                <option value=''>--Choisissez une couleur--</option>
-                <option value='white'>Blancs</option>
-                <option value='black'>Noirs</option>
-            </select>
-            <textarea value={newOpeningJSON} className="L_createInput" placeholder="JSON de l'ouverture (optionnel)" onChange={(e) => updateNewOpeningJSON(e)}></textarea>
-            {createOpening}
+        <div className="CO_createOpeningContainer">
+            <div className="CO_createOpeningBox">
+                <h2 className='CO_title'>Nouvelle ouverture</h2>
+                <input value={newOpeningId} className="CO_createInput" placeholder="Nouvelle ouverture (id)" onChange={(e) => updateNewOpeningId(e)}></input>
+                <input value={newOpeningName} className="CO_createInput" placeholder="Nouvelle ouverture (nom)" onChange={(e) => updateNewOpeningName(e)}></input>
+                <select className="CO_createSelector" onChange={(e) => updateNewOpeningColor(e)}>
+                    <option value=''>--Choisissez une couleur--</option>
+                    <option value='white'>Blancs</option>
+                    <option value='black'>Noirs</option>
+                </select>
+                <textarea value={newOpeningJSON} className="CO_createInput" placeholder="JSON de l'ouverture (optionnel)" onChange={(e) => updateNewOpeningJSON(e)}></textarea>
+                {createOpening}
+            </div>
         </div>
     )
 }

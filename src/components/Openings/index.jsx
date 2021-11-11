@@ -18,6 +18,7 @@ if(openingsList == null){
 const Openings = () => {
     const [opening, setOpening] = useState('');
     const [isGuided, setIsGuided] = useState(false);
+    const [openingJSON, setOpeningJSON] = useState('');
 
     const updateOpening = (e) => {
         console.log('Update Opening');
@@ -33,6 +34,7 @@ const Openings = () => {
         localStorage.removeItem(opening);
         localStorage.removeItem(opening+"Puzzles");
         setOpening("");
+        window.location.reload();
     }
 
     const confirmDeleteOpening = () => {
@@ -40,6 +42,25 @@ const Openings = () => {
             deleteOpening();
         }
     }
+
+    const displayOpening = () =>{
+        setOpeningJSON(localStorage.getItem(opening));
+    }
+
+    const closeDisplayJSON = () => {
+        setOpeningJSON('');
+    }
+
+    const displayOpeningJSON = openingJSON !== '' && 
+        <div className="O_containerJSON">
+            <div className="O_openingDataJSON">
+                <h2>{JSON.parse(localStorage.getItem(opening))["name"]} (JSON)</h2>
+                <p>
+                    {localStorage.getItem(opening)}
+                </p> 
+            </div>
+            <button onClick={() => closeDisplayJSON()}>Fermer</button>
+        </div>
 
     const startTraining = 
         opening === '' ? 
@@ -73,7 +94,7 @@ const Openings = () => {
                             </div>
                             <span className="O_choiceSubtitle">Supprimer</span>
                         </div>
-                        <div className="O_clickableBtn">
+                        <div className="O_clickableBtn" onClick={() => displayOpening()}>
                             <div className="O_choiceBox">
                                 <VscJson className="O_choiceIcon"/>
                             </div>
@@ -115,6 +136,7 @@ const Openings = () => {
                 </select>
                 {startTraining}
             </div>
+            {displayOpeningJSON}
         </div>
     )
 }

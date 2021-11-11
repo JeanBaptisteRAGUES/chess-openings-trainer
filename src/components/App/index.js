@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Landing2 from '../Landing2';
 import ErrorPage from '../ErrorPage';
 import CreateOpening from '../CreateOpening';
-import CreateOpening2 from '../CreateOpening2';
 import Training2 from '../Training2';
 import CreatePuzzle from '../CreatePuzzle';
 import ResolvePuzzle from '../ResolvePuzzle';
@@ -22,7 +21,6 @@ function App() {
           <Route path="/puzzles" component={Puzzles} />
           <Route path="/training2/:opening/:guided" component={Training2} />
           <Route path="/createopening/" component={CreateOpening} />
-          <Route path="/createopening2/:opening" component={CreateOpening2} />
           <Route path="/modifyOpening/:opening" component={ModifyOpening} />
           <Route path="/createpuzzle/:opening" component={CreatePuzzle} />
           <Route path="/resolvepuzzle/:puzzlesList/:puzzleIndex/:isRandom" component={ResolvePuzzle} />

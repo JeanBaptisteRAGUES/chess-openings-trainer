@@ -1,0 +1,29 @@
+.CO_createOpeningContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.CO_createOpeningBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid chocolate;
+    margin: 20px;
+    width: 400px;
+    height: 300px;
+}
+
+.CO_createInput{
+    margin: 5px;
+}
+
+.CO_createSelector{
+    margin: 5px;
+}
+
+.CO_title{
+    color: chocolate;
+}
