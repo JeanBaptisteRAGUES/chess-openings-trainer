@@ -83,19 +83,22 @@ const ModifyOpening = () => {
 
     const searchForVariants = (movesList, turn) => {
         let potentialVariants = [movesList];
+        let potentialNextMove = [JSON.stringify(openingData[movesList][turn][1])]
         //let potentialVariants = [];
 
         openingData["variantsList"].forEach(variantName => {
             if(JSON.stringify(openingData[variantName].slice(0, turn)) === JSON.stringify(openingData[movesList].slice(0, turn))){
                 if(JSON.stringify(openingData[variantName].slice(0, turn+1)) !== JSON.stringify(openingData[movesList].slice(0, turn+1))){
-                    potentialVariants.push(variantName);
-                    //console.log("base : " + JSON.stringify(openingData[movesList].slice(0, turn+1)));
-                    //console.log("variant : " + JSON.stringify(openingData[variantName].slice(0, turn+1)));
+                    if(!potentialNextMove.some(pnm => pnm === JSON.stringify(openingData[variantName][turn][1]))){
+                        potentialVariants.push(variantName);
+                        potentialNextMove.push(JSON.stringify(openingData[variantName][turn][1]));
+                        console.log(openingData[variantName][turn][1]);
+                    }
                 }
             }
         });
 
-        console.log(potentialVariants);
+        console.log("Potential variants : " + potentialVariants);
         if(potentialVariants.length > 1) setVariants(potentialVariants);
 
         return potentialVariants.length > 1;
